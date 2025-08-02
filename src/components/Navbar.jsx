@@ -1,10 +1,16 @@
 import React from "react";
-import { Link, useLocation } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
   const { pathname } = useLocation();
+  const navigate = useNavigate();
+
+  const handlelogut = () => {
+    toast.success("Logout Successfull!");
+  };
   return (
-    <div className="navbar  shadow-lg px-[2%] ">
+    <div className="navbar bg-zinc-800  shadow-lg px-[2%] ">
       <div className="flex-1">
         <Link
           to={"/"}
@@ -13,44 +19,48 @@ const Navbar = () => {
           DevTinder
         </Link>
       </div>
-      {pathname === "/" || "/login" ? (
+      {pathname === "/profile" ? (
         <div>
-          <Link
-            to={`${pathname}login`}
-            className="px-[2vh] btn btn-ghost hover:bg-white text-black py-20px font-semibold text-lg sm:text-lg md-text-xl lg:text-2xl xl:text-3xl   text-white rounded-lg hover:text-black"
-          >
-            Log in
-          </Link>
+          <div className="dropdown dropdown-end">
+            <div tabIndex={0} role="button" className="  avatar">
+              <div className="w-10 sm:w-15 md:w-15 rounded-full cursor-pointer">
+                <img
+                  alt="Tailwind CSS Navbar component"
+                  src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                />
+              </div>
+            </div>
+            <ul
+              tabIndex={0}
+              className="menu menu-sm dropdown-content bg-base-100  rounded-box z-1 pb-5 mt-3 w-50 p-2 shadow "
+            >
+              <div className="flex flex-col gap-4">
+                <Link className="t hover:bg-zinc-800 py-[2%] rounded-md text-sm sm:text-md md:text-lg lg:text-lg xl:text-xl">
+                  Profile
+                </Link>
+
+                <Link className="hover:bg-zinc-800 py-[2%] rounded-md text-sm sm:text-md md:text-lg lg:text-lg xl:text-xl">
+                  Settings
+                </Link>
+
+                <Link
+                  to={"/login"}
+                  onClick={handlelogut}
+                  className="hover:bg-zinc-800 py-[2%] rounded-md text-sm sm:text-md md:text-lg lg:text-lg xl:text-xl"
+                >
+                  Logout
+                </Link>
+              </div>
+            </ul>
+          </div>
         </div>
       ) : (
-        <div className="dropdown dropdown-end">
-          <div tabIndex={0} role="button" className="  avatar">
-            <div className="w-10 sm:w-15 md:w-15 rounded-full cursor-pointer">
-              <img
-                alt="Tailwind CSS Navbar component"
-                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
-              />
-            </div>
-          </div>
-          <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100  rounded-box z-1 pb-5 mt-3 w-50 p-2 shadow "
-          >
-            <div className="flex flex-col gap-4">
-              <Link className="t hover:bg-zinc-800 py-[2%] rounded-md text-sm sm:text-md md:text-lg lg:text-lg xl:text-xl">
-                Profile
-              </Link>
-
-              <Link className="hover:bg-zinc-800 py-[2%] rounded-md text-sm sm:text-md md:text-lg lg:text-lg xl:text-xl">
-                Settings
-              </Link>
-
-              <Link className="hover:bg-zinc-800 py-[2%] rounded-md text-sm sm:text-md md:text-lg lg:text-lg xl:text-xl">
-                Logout
-              </Link>
-            </div>
-          </ul>
-        </div>
+        <Link
+          to={`/login`}
+          className="px-[2vh] btn btn-ghost hover:bg-white text-black py-20px font-semibold text-lg sm:text-lg md-text-xl lg:text-2xl xl:text-3xl   text-white rounded-lg hover:text-black"
+        >
+          Log in
+        </Link>
       )}
     </div>
   );

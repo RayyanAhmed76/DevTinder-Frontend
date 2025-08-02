@@ -1,18 +1,66 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import axios from "axios";
+import { Link, useNavigate } from "react-router";
+import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { Adduser } from "../store/UserSlice";
 
 const Login = () => {
+  const [EmailID, setEmailID] = useState(null);
+  const [Password, setpassword] = useState(null);
+  const navigate = useNavigate();
+  const emailref = useRef(null);
+  const passwordref = useRef(null);
+  const dispatch = useDispatch();
+
+  const goback = () => {
+    navigate("/");
+  };
+
+  const handlelogin = async () => {
+    try {
+      const res = await axios.post(
+        "http://localhost:7777/login",
+        {
+          EmailID,
+          Password,
+        },
+        {
+          withCredentials: true,
+        }
+      );
+      dispatch(Adduser(res.data));
+
+      if (EmailID && Password !== null) {
+        toast.success(`Welcome, ${res.data.firstName}`);
+        emailref.current.value = "";
+        passwordref.current.value = "";
+        navigate("/profile");
+      }
+    } catch (error) {
+      toast.error("Invalid credentials!");
+      console.log(error);
+      emailref.current.value = "";
+      passwordref.current.value = "";
+    }
+  };
+
   return (
-    <div className=" card bg-zinc-800 min-h-[40vh] w-80 shadow-sm">
-      <div className="flex justify-center font-semibold text-3xl mb-[20%]">
+    <div className=" card bg-zinc-800 h-auto w-80 md:w-100 lg:w-120 xl:w-150 2xl:w-180 shadow-sm">
+      <div className="flex relative justify-center items-center font-semibold text-3xl mb-[20%] mt-[3%]">
         <h1>Login</h1>
+        <i
+          onClick={goback}
+          className="ri-close-fill absolute right-0 p-4 cursor-pointer"
+        ></i>
       </div>
-      <div className="">
-        <label className="input validator mb-[8%]  ">
+      <div className=" flex flex-col items-center">
+        <label className="input validator mb-[8%] w-mx-auto md:w-[40vh] lg:w-[50vh] xl:w-[55vh] ">
           <svg
-            className="h-[1em] opacity-50"
+            className="h-[1em]  opacity-50"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
           >
@@ -27,9 +75,17 @@ const Login = () => {
               <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
             </g>
           </svg>
-          <input type="email" placeholder="mail@site.com" required />
+          <input
+            ref={emailref}
+            type="email"
+            placeholder="Enter Email address"
+            title="Please enter a valid Email address"
+            value={EmailID}
+            onChange={(e) => setEmailID(e.target.value)}
+            required
+          />
         </label>
-        <label className="input validator">
+        <label className="input validator mb-[20%] w-mx-auto md:w-[40vh] lg:w-[50vh] xl:w-[55vh]">
           <svg
             className="h-[1em] opacity-50"
             xmlns="http://www.w3.org/2000/svg"
@@ -47,24 +103,23 @@ const Login = () => {
             </g>
           </svg>
           <input
+            ref={passwordref}
             type="password"
             required
             placeholder="Password"
             minlength="8"
+            value={Password}
+            onChange={(e) => setpassword(e.target.value)}
             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
             title="Must be more than 8 characters, including number, lowercase letter, uppercase letter"
           />
         </label>
-        <p className="validator-hint hidden">
-          Must be more than 8 characters, including
-          <br />
-          At least one number <br />
-          At least one lowercase letter <br />
-          At least one uppercase letter
-        </p>
-        <div className="validator-hint hidden">Enter valid email address</div>
-        <div className="flex justify-center h-full items-end">
-          <button className="btn bg-white text-black border-[#e5e5e5]">
+
+        <div className="flex justify-center h-full items-end mb-[10%]">
+          <Link
+            onClick={handlelogin}
+            className="btn bg-white text-black border-[#e5e5e5] cursor-pointer"
+          >
             <svg
               aria-label="Email icon"
               width="16"
@@ -84,7 +139,7 @@ const Login = () => {
               </g>
             </svg>
             Login with Email
-          </button>
+          </Link>
         </div>
       </div>
     </div>

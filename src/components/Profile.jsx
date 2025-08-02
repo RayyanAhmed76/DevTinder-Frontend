@@ -1,7 +1,8 @@
 import React from "react";
+import { toast } from "react-toastify";
 
 const Profile = () => {
-  return <div>Profile</div>;
+  return <div></div>;
 };
 
 export default Profile;
