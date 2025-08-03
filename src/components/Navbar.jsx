@@ -1,14 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router";
 import { toast } from "react-toastify";
+import { Removeuser } from "../store/UserSlice";
 
 const Navbar = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
+  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
-  const handlelogut = () => {
+  const handlelogut = (e) => {
+    e.preventDefault;
+    dispatch(Removeuser(null));
     toast.success("Logout Successfull!");
   };
+  console.log(user);
   return (
     <div className="navbar bg-zinc-800  shadow-lg px-[2%] ">
       <div className="flex-1">
@@ -19,14 +26,14 @@ const Navbar = () => {
           DevTinder
         </Link>
       </div>
-      {pathname === "/profile" ? (
+      {user !== null ? (
         <div>
           <div className="dropdown dropdown-end">
             <div tabIndex={0} role="button" className="  avatar">
               <div className="w-10 sm:w-15 md:w-15 rounded-full cursor-pointer">
                 <img
                   alt="Tailwind CSS Navbar component"
-                  src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp"
+                  src={`${user.photoURL}`}
                 />
               </div>
             </div>
