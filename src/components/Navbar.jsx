@@ -11,9 +11,10 @@ const Navbar = () => {
   const dispatch = useDispatch();
 
   const handlelogut = (e) => {
-    e.preventDefault;
+    e.preventDefault();
     dispatch(Removeuser(null));
     toast.success("Logout Successfull!");
+    navigate("/login");
   };
   console.log(user);
   return (
