@@ -10,6 +10,10 @@ const Navbar = () => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
+  const editprofile = () => {
+    navigate("/profile/edit");
+  };
+
   const handlelogut = (e) => {
     e.preventDefault();
     dispatch(Removeuser(null));
@@ -43,9 +47,21 @@ const Navbar = () => {
               className="menu menu-sm dropdown-content bg-base-100  rounded-box z-1 pb-5 mt-3 w-50 p-2 shadow "
             >
               <div className="flex flex-col gap-4">
-                <Link className="t hover:bg-zinc-800 py-[2%] rounded-md text-sm sm:text-md md:text-lg lg:text-lg xl:text-xl">
-                  Profile
-                </Link>
+                {pathname === "/profile" ? (
+                  <a
+                    onClick={editprofile}
+                    className="t hover:bg-zinc-800 py-[2%] rounded-md text-sm sm:text-md md:text-lg lg:text-lg xl:text-xl"
+                  >
+                    Edit Profile
+                  </a>
+                ) : (
+                  <Link
+                    to={"/profile"}
+                    className="t hover:bg-zinc-800 py-[2%] rounded-md text-sm sm:text-md md:text-lg lg:text-lg xl:text-xl"
+                  >
+                    Profile
+                  </Link>
+                )}
 
                 <Link className="hover:bg-zinc-800 py-[2%] rounded-md text-sm sm:text-md md:text-lg lg:text-lg xl:text-xl">
                   Settings

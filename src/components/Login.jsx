@@ -15,6 +15,7 @@ const Login = () => {
   const emailref = useRef(null);
   const passwordref = useRef(null);
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
 
   const goback = () => {
     navigate("/");
@@ -47,6 +48,23 @@ const Login = () => {
       passwordref.current.value = "";
     }
   };
+
+  const fetchuser = async () => {
+    try {
+      const res = await axios.get("http://localhost:7777/profile/view", {
+        withCredentials: true,
+      });
+      dispatch(Adduser(res.data));
+    } catch (error) {
+      res.status(401).send(error.message);
+    }
+  };
+
+  useEffect(() => {
+    if (!user) {
+      fetchuser();
+    }
+  }, []);
 
   return (
     <div className=" card bg-zinc-800 h-auto w-80 md:w-100 lg:w-120 xl:w-150 2xl:w-180 shadow-sm">

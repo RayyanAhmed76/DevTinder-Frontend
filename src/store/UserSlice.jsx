@@ -8,7 +8,7 @@ const userslice = createSlice({
       return action.payload;
     },
     Removeuser(state, action) {
-      return action.payload;
+      return null;
     },
   },
 });
