@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import Navbar from "./Navbar";
 import Footer from "./Footer";
@@ -39,7 +39,7 @@ const Login = () => {
         toast.success(`Welcome, ${res.data.firstName}`);
         emailref.current.value = "";
         passwordref.current.value = "";
-        navigate("/profile");
+        navigate("/feed");
       }
     } catch (error) {
       toast.error("Invalid credentials!");

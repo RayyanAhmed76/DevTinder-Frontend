@@ -2,21 +2,48 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router";
 import { toast } from "react-toastify";
-import { Removeuser } from "../store/UserSlice";
+import { Adduser, Removeuser } from "../store/UserSlice";
+import axios from "axios";
 
 const Navbar = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
+  const feed = useSelector((state) => state.feed);
+
+  const verifylogin = async () => {
+    if (user) {
+    }
+  };
+  const fetchuser = async () => {
+    try {
+      const res = await axios.get("http://localhost:7777/profile/view", {
+        withCredentials: true,
+      });
+      dispatch(Adduser(res.data));
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  useEffect(() => {
+    if (!user) {
+      fetchuser();
+    }
+  }, []);
 
   const editprofile = () => {
     navigate("/profile/edit");
   };
 
-  const handlelogut = (e) => {
-    e.preventDefault();
-    dispatch(Removeuser(null));
+  const handlelogut = async () => {
+    const res = await axios.post(
+      "http://localhost:7777/logout",
+      {},
+      { withCredentials: true }
+    );
+    dispatch(Removeuser());
     toast.success("Logout Successfull!");
     navigate("/login");
   };
@@ -47,10 +74,31 @@ const Navbar = () => {
               className="menu menu-sm dropdown-content bg-base-100  rounded-box z-1 pb-5 mt-3 w-50 p-2 shadow "
             >
               <div className="flex flex-col gap-4">
+                {pathname === "/" ? (
+                  " "
+                ) : (
+                  <Link
+                    to={"/"}
+                    className="hover:bg-zinc-800 py-[2%] rounded-md text-sm sm:text-md md:text-lg lg:text-lg xl:text-xl"
+                  >
+                    Home
+                  </Link>
+                )}
+
+                {pathname === "/feed" ? (
+                  " "
+                ) : (
+                  <Link
+                    to={"/feed"}
+                    className="hover:bg-zinc-800 py-[2%] rounded-md text-sm sm:text-md md:text-lg lg:text-lg xl:text-xl"
+                  >
+                    Feed
+                  </Link>
+                )}
                 {pathname === "/profile" ? (
                   <a
                     onClick={editprofile}
-                    className="t hover:bg-zinc-800 py-[2%] rounded-md text-sm sm:text-md md:text-lg lg:text-lg xl:text-xl"
+                    className="t hover:bg-zinc-800 py-[2%] cursor-pointer rounded-md text-sm sm:text-md md:text-lg lg:text-lg xl:text-xl"
                   >
                     Edit Profile
                   </a>
@@ -62,10 +110,6 @@ const Navbar = () => {
                     Profile
                   </Link>
                 )}
-
-                <Link className="hover:bg-zinc-800 py-[2%] rounded-md text-sm sm:text-md md:text-lg lg:text-lg xl:text-xl">
-                  Settings
-                </Link>
 
                 <Link
                   to={"/login"}

@@ -24,7 +24,9 @@ const Home = () => {
   };
 
   useEffect(() => {
-    fetchuser();
+    if (!user) {
+      fetchuser();
+    }
   }, []);
 
   return (
