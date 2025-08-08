@@ -30,7 +30,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div className=" overflow-y-auto overflow-x-hidden ">
+    <div className="  overflow-x-hidden ">
       <Navbar />
       <div
         className="bg-cover w-full h-screen "
@@ -41,7 +41,6 @@ const Home = () => {
           <Outlet />
         </div>
       </div>
-
       <Footer />
     </div>
   );

@@ -1,15 +1,20 @@
-import React, { useEffect } from "react";
-import { toast } from "react-toastify";
+import React from "react";
+import { Link, useNavigate } from "react-router";
 import { motion } from "framer-motion";
-import Footer from "./Footer";
-import Navbar from "./Navbar";
-import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
-import { Adduser } from "../store/UserSlice";
-import { h1 } from "framer-motion/client";
 
-const ProfileCard = ({ data }) => {
-  const user = data;
+const ReqProfile = ({ data }) => {
+  const navigate = useNavigate();
+  const user = {
+    photoURL:
+      "https://media.istockphoto.com/id/1682296067/photo/happy-studio-portrait-or-professional-man-real-estate-agent-or-asian-businessman-smile-for.jpg?s=612x612&w=0&k=20&c=9zbG2-9fl741fbTWw5fNgcEEe4ll-JegrGlQQ6m54rg=",
+    firstName: "rayyan",
+    lastName: "ahmed",
+    age: "21",
+    gender: "male",
+    about: "hi,I'M RAYYAN",
+    skills: ["java", "react", "node"],
+  };
+
   if (!user) {
     return (
       <div className="min-h-screen flex justify-center items-center">
@@ -26,10 +31,12 @@ const ProfileCard = ({ data }) => {
     about: user.about,
     skills: user.skills,
   };
-
   return (
-    <div className="  overflow-x-hidden ">
-      <Navbar />
+    <div className="bg-[rgba(0,0,0,.8)] absolute top-0 left-0 flex w-screen h-screen z-[50] items-center justify-center">
+      <Link
+        onClick={() => navigate(-1)}
+        className="hover:text-[#6556CD] absolute right-[3%] top-[5%] text-5xl text-white ri-close-fill text-zinc-500 text-4xl"
+      ></Link>
       <div className="min-h-screen flex items-center justify-center p-4 ">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
@@ -71,9 +78,8 @@ const ProfileCard = ({ data }) => {
           </div>
         </motion.div>
       </div>
-      <Footer />
     </div>
   );
 };
 
-export default ProfileCard;
+export default ReqProfile;

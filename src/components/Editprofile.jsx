@@ -32,7 +32,7 @@ const Editprofile = ({ data }) => {
     );
   }
   const [profile, setProfile] = useState({
-    photoUrl: user.photoUrl,
+    photoURL: user.photoURL,
     firstName: user.firstName,
     lastName: user.lastName,
     age: user.age,
@@ -61,13 +61,13 @@ const Editprofile = ({ data }) => {
     setProfile((prev) => ({ ...prev, skills: updatedSkills }));
   };
 
-  const { firstName, lastName, age, about, gender, photoUrl, skills } = profile;
+  const { firstName, lastName, age, about, gender, photoURL, skills } = profile;
 
   const updatedata = async () => {
     try {
       const res = await axios.patch(
         "http://localhost:7777/profile/edit",
-        { firstName, lastName, age, about, gender, photoUrl, skills },
+        { firstName, lastName, age, about, gender, photoURL, skills },
         { withCredentials: true }
       );
       dispatch(Adduser(res?.data?.data));
@@ -93,15 +93,24 @@ const Editprofile = ({ data }) => {
             <div className="flex flex-col md:flex-col gap-8 items-center">
               <div className="flex flex-col items-center">
                 <img
-                  src={profile.photoUrl}
+                  src={profile.photoURL}
                   alt="Profile"
                   className="w-32 h-32 rounded-full object-cover border-4 border-indigo-500 shadow-lg"
                 />
               </div>
 
               <div className="flex-1">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mb-6 ">
-                  <h1 className="text-white  ">FirstName</h1>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mb-6  ">
+                  <h1 className="text-white mt-3  ">photoURL</h1>
+                  <input
+                    type="text"
+                    name="photoURL"
+                    value={profile.photoURL}
+                    onChange={handleChange}
+                    placeholder="Enter photo URL"
+                    className="input text-sm text-center mt-2"
+                  />
+                  <h1 className="text-white mt-3  ">FirstName</h1>
                   <input
                     type="text"
                     name="firstName"
@@ -110,7 +119,7 @@ const Editprofile = ({ data }) => {
                     className="input"
                     placeholder="First Name"
                   />
-                  <h1 className="text-white ">LastName</h1>
+                  <h1 className="text-white mt-3">LastName</h1>
                   <input
                     type="text"
                     name="lastName"
@@ -119,7 +128,7 @@ const Editprofile = ({ data }) => {
                     className="input"
                     placeholder="Last Name"
                   />
-                  <h1 className="text-white ">Age</h1>
+                  <h1 className="text-white mt-3">Age</h1>
                   <input
                     type="number"
                     name="age"
@@ -128,7 +137,7 @@ const Editprofile = ({ data }) => {
                     className="input"
                     placeholder="Age"
                   />
-                  <h1 className="text-white ">Gender</h1>
+                  <h1 className="text-white mt-3">Gender</h1>
                   <input
                     type="text"
                     name="gender"

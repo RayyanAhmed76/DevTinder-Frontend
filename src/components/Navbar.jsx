@@ -95,6 +95,27 @@ const Navbar = () => {
                     Feed
                   </Link>
                 )}
+                {pathname === "/connections" ? (
+                  " "
+                ) : (
+                  <Link
+                    to={"/connections"}
+                    className="hover:bg-zinc-800 py-[2%] rounded-md text-sm sm:text-md md:text-lg lg:text-lg xl:text-xl"
+                  >
+                    Connections
+                  </Link>
+                )}
+                {pathname === "/request" ? (
+                  " "
+                ) : (
+                  <Link
+                    to={"/request"}
+                    className="hover:bg-zinc-800 py-[2%] rounded-md text-sm sm:text-md md:text-lg lg:text-lg xl:text-xl"
+                  >
+                    Request
+                  </Link>
+                )}
+
                 {pathname === "/profile" ? (
                   <a
                     onClick={editprofile}

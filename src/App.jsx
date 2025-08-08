@@ -9,6 +9,9 @@ import "react-toastify/dist/ReactToastify.css";
 import Editprofile from "./components/Editprofile";
 import Feed from "./components/Feed";
 import ProfileCard from "./components/ProfileCard";
+import Connections from "./components/Connections";
+import ReqProfile from "./components/ReqProfile";
+import Request from "./components/Request";
 
 const App = () => {
   return (
@@ -22,6 +25,10 @@ const App = () => {
           <Route path="/profilecard" element={<ProfileCard />} />
         </Route>
         <Route path="/feed" element={<Feed />} />
+        <Route path="/connections" element={<Connections />} />
+        <Route path="/request" element={<Request />}>
+          <Route path="/request/profile" element={<ReqProfile />} />
+        </Route>
       </Routes>
       <ToastContainer position="top-center" autoClose={2000} />
     </div>

@@ -24,11 +24,6 @@ const Feed = () => {
   useEffect(() => {
     getfeed();
   }, []);
-  useEffect(() => {
-    if (feed) {
-      console.log("Feed from store:", feed);
-    }
-  }, [feed]);
 
   console.log(feed);
 
