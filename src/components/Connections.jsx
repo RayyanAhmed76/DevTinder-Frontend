@@ -35,11 +35,14 @@ const Connections = () => {
       <Navbar />
 
       <div className="flex-1 flex flex-col">
-        <h1 className="text-3xl font-semibold text-center mt-4">Connections</h1>
+        <h1 className="text-3xl font-semibold text-center mt-4 mb-2">
+          Connections
+        </h1>
 
         <div
-          className="
-          
+          className=" 
+
+            
           "
         >
           {user && user.some((u) => u.firstName || u.lastName) ? (

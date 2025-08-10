@@ -51,10 +51,12 @@ const Request = () => {
     request && (
       <div className=" overflow-x-hidden  ">
         <Navbar />
-        <div className="">
-          <h1 className="text-3xl font-semibold text-center mt-3">Request</h1>
+        <div className="h-screen ">
+          <h1 className="text-3xl md:text-6xl font-semibold text-center pt-[20%]  mt-3  ">
+            Request
+          </h1>
           {request.length === 0 ? (
-            <h1 className="text-center mt-5 text-lg text-gray-400 ">
+            <h1 className="text-center mt-5 text-lg md:text-xl text-gray-400 ">
               No Request yet
             </h1>
           ) : (

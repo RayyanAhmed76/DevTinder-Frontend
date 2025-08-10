@@ -12,6 +12,7 @@ import ProfileCard from "./components/ProfileCard";
 import Connections from "./components/Connections";
 import ReqProfile from "./components/ReqProfile";
 import Request from "./components/Request";
+import Signup from "./components/Signup";
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />}>
           <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
         </Route>
         <Route path="/profile" element={<Profile />}>
           <Route path="/profile/edit" element={<Editprofile />} />

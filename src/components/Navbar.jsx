@@ -63,15 +63,14 @@ const Navbar = () => {
           <div className="dropdown dropdown-end flex flex-col items-center ml-10">
             <div tabIndex={0} role="button" className="  avatar">
               <div className="w-10 sm:w-15 md:w-15  rounded-full cursor-pointer">
-                <img
-                  alt="Tailwind CSS Navbar component"
-                  src={`${user.photoURL}`}
-                />
+                {user && user.photoURL && (
+                  <img src={user.photoURL} alt="User" />
+                )}
               </div>
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100  rounded-box z-1 pb-5 mt-3 w-50 p-2 shadow "
+              className="menu menu-sm dropdown-content bg-base-100  rounded-box z-1 pb-7 mt-3 w-50 p-2 shadow "
             >
               <div className="flex flex-col gap-4">
                 {pathname === "/" ? (
