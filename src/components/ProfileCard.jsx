@@ -7,9 +7,29 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { Adduser } from "../store/UserSlice";
 import { h1 } from "framer-motion/client";
+import { useLocation } from "react-router";
+import { RemoveFeed } from "../store/FeedSlice";
 
 const ProfileCard = ({ data }) => {
+  const { pathname } = useLocation();
+  const dispatch = useDispatch();
   const user = data;
+
+  const handlebutton = async (status, user_id) => {
+    const res = await axios.post(
+      `http://localhost:7777/request/send/${status}/${user_id}`,
+      {},
+      { withCredentials: true }
+    );
+    dispatch(RemoveFeed(user_id));
+
+    if (status === "interested") {
+      toast.success("Request send sucessfully!");
+    } else {
+      toast.error("Dev ignored!");
+    }
+  };
+
   if (!user) {
     return (
       <div className="min-h-screen flex justify-center items-center">
@@ -18,6 +38,7 @@ const ProfileCard = ({ data }) => {
     );
   }
   const profile = {
+    user_id: user._id,
     photoURL: user.photoURL,
     firstName: user.firstName,
     lastName: user.lastName,
@@ -67,6 +88,28 @@ const ProfileCard = ({ data }) => {
                   <h1>No Skills</h1>
                 )}
               </ul>
+              {pathname === "/feed" ? (
+                <div className="flex gap-4 mt-10">
+                  <button
+                    onClick={() => {
+                      handlebutton("ignored", profile.user_id);
+                    }}
+                    className="px-4 py-2 bg-zinc-500 rounded-lg cursor-pointer text-xl font-semibold hover:bg-zinc-400 hover:text-red-600"
+                  >
+                    Ignore
+                  </button>
+                  <button
+                    onClick={() => {
+                      handlebutton("interested", profile.user_id);
+                    }}
+                    className="px-4 py-2 bg-zinc-500 rounded-lg cursor-pointer text-xl font-semibold hover:bg-zinc-400  hover:text-green-600"
+                  >
+                    Interested
+                  </button>
+                </div>
+              ) : (
+                ""
+              )}
             </div>
           </div>
         </motion.div>

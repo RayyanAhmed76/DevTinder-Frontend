@@ -3,7 +3,7 @@ import { Link } from "react-router";
 
 const Footer = () => {
   return (
-    <footer className=" w-screen footer footer-horizontal footer-center bg-zinc-800  bg-opacity-10 text-base-content rounded p-10 ">
+    <footer className=" w-screen flex flex-col   footer footer-horizontal footer-center bg-zinc-800  bg-opacity-10 text-base-content rounded p-10 ">
       <nav className="grid grid-flow-col gap-4 text-sm sm:text-lg md:text-lg lg:text-xl xl:text-2xl">
         <Link className="hover:bg-zinc-600 duration-300 py-[2%] rounded-lg">
           About us

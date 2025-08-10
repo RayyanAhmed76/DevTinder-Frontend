@@ -49,7 +49,7 @@ const Navbar = () => {
   };
   console.log(user);
   return (
-    <div className="navbar bg-zinc-800  shadow-lg px-[2%] ">
+    <div className="navbar bg-zinc-800 shadow-lg px-[2%] ">
       <div className="flex-1">
         <Link
           to={"/"}
@@ -60,9 +60,9 @@ const Navbar = () => {
       </div>
       {user !== null ? (
         <div>
-          <div className="dropdown dropdown-end">
+          <div className="dropdown dropdown-end flex flex-col items-center ml-10">
             <div tabIndex={0} role="button" className="  avatar">
-              <div className="w-10 sm:w-15 md:w-15 rounded-full cursor-pointer">
+              <div className="w-10 sm:w-15 md:w-15  rounded-full cursor-pointer">
                 <img
                   alt="Tailwind CSS Navbar component"
                   src={`${user.photoURL}`}
@@ -141,6 +141,7 @@ const Navbar = () => {
                 </Link>
               </div>
             </ul>
+            <h1>{user.firstName}</h1>
           </div>
         </div>
       ) : (
