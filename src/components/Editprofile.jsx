@@ -80,10 +80,10 @@ const Editprofile = ({ data }) => {
 
   return (
     user && (
-      <div className=" overflow-y-auto overflow-x-hidden ">
+      <div className=" overflow-y-auto overflow-x-hidden bg-gradient-to-br from-gray-900 to-gray-800  ">
         <Navbar />
 
-        <div className="min-h-screen  flex items-center justify-center p-6">
+        <div className="min-h-screen  flex items-center justify-center p-6 mt-[12vh]">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -95,7 +95,7 @@ const Editprofile = ({ data }) => {
                 <img
                   src={profile.photoURL}
                   alt="Profile"
-                  className="w-32 h-32 rounded-full object-cover border-4 border-indigo-500 shadow-lg"
+                  className="w-32 h-32 rounded-full object-cover ring-4 ring-pink-500 shadow-lg"
                 />
               </div>
 
@@ -188,7 +188,8 @@ const Editprofile = ({ data }) => {
                     ))}
                     <button
                       onClick={addSkill}
-                      className="text-sm px-[5%] py-[1%] rounded-full bg-purple-400 text-zinc-300 font-semibold cursor-pointer md:ml-2 hover:text-indigo-800"
+                      className="px-5 py-2 rounded-full bg-blue-500 text-white 
+       hover:bg-blue-600 transition-colors duration-300 cursor-pointer"
                     >
                       + Add Skill
                     </button>
@@ -196,12 +197,16 @@ const Editprofile = ({ data }) => {
                 </div>
 
                 <div className="mt-6 flex justify-end gap-4">
-                  <button className="px-4 py-2 bg-gray-400 hover:bg-gray-300 cursor-pointer rounded-full text-sm">
+                  <button
+                    className="px-[5%] py-[1%] rounded-full bg-gray-600 text-white 
+           hover:bg-red-500 transition-colors duration-300 cursor-pointer"
+                  >
                     Cancel
                   </button>
                   <button
                     onClick={updatedata}
-                    className="px-4 py-2 bg-indigo-500 cursor-pointer text-white hover:bg-indigo-600 rounded-full text-sm"
+                    className="px-5 py-2 rounded-full bg-gray-600 text-white 
+           hover:bg-green-500 transition-colors duration-300 cursor-pointer"
                   >
                     Save
                   </button>

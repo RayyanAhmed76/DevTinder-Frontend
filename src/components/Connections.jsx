@@ -31,11 +31,11 @@ const Connections = () => {
   }, []);
 
   return (
-    <div className="overflow-x-hidden flex flex-col min-h-screen">
+    <div className="overflow-x-hidden flex flex-col min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 ">
       <Navbar />
 
-      <div className="flex-1 flex flex-col">
-        <h1 className="text-3xl font-semibold text-center mt-4 mb-2">
+      <div className="flex-1 flex flex-col mt-[15vh] ">
+        <h1 className="text-3xl md:text-5xl font-semibold text-center mt-4 mb-2">
           Connections
         </h1>
 

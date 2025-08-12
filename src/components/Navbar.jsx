@@ -49,7 +49,7 @@ const Navbar = () => {
   };
   console.log(user);
   return (
-    <div className="navbar bg-zinc-800 shadow-lg px-[2%] ">
+    <div className="absolute top-0 left-0 w-full flex justify-between items-center  px-4 py-3 bg-transparent z-100 ">
       <div className="flex-1">
         <Link
           to={"/"}
@@ -70,15 +70,15 @@ const Navbar = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100  rounded-box z-1 pb-7 mt-3 w-50 p-2 shadow "
+              className="menu menu-sm dropdown-content bg-zinc-800 hover:bg-zinc-700 rounded-xl shadow-lg shadow-black/30 rounded-box z-50 space-y-1 pb-7 mt-[7.5vh] w-50 p-2 shadow "
             >
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-4 ">
                 {pathname === "/" ? (
                   " "
                 ) : (
                   <Link
                     to={"/"}
-                    className="hover:bg-zinc-800 py-[2%] rounded-md text-sm sm:text-md md:text-lg lg:text-lg xl:text-xl"
+                    className="hover:bg-zinc-800 py-[2%] p-2 rounded-md text-sm sm:text-md md:text-lg lg:text-lg xl:text-xl"
                   >
                     Home
                   </Link>
@@ -89,7 +89,7 @@ const Navbar = () => {
                 ) : (
                   <Link
                     to={"/feed"}
-                    className="hover:bg-zinc-800 py-[2%] rounded-md text-sm sm:text-md md:text-lg lg:text-lg xl:text-xl"
+                    className="hover:bg-zinc-800 py-[2%] p-2 rounded-md text-sm sm:text-md md:text-lg lg:text-lg xl:text-xl"
                   >
                     Feed
                   </Link>
@@ -99,7 +99,7 @@ const Navbar = () => {
                 ) : (
                   <Link
                     to={"/connections"}
-                    className="hover:bg-zinc-800 py-[2%] rounded-md text-sm sm:text-md md:text-lg lg:text-lg xl:text-xl"
+                    className="hover:bg-zinc-800 py-[2%] p-2 rounded-md text-sm sm:text-md md:text-lg lg:text-lg xl:text-xl"
                   >
                     Connections
                   </Link>
@@ -109,7 +109,7 @@ const Navbar = () => {
                 ) : (
                   <Link
                     to={"/request"}
-                    className="hover:bg-zinc-800 py-[2%] rounded-md text-sm sm:text-md md:text-lg lg:text-lg xl:text-xl"
+                    className="hover:bg-zinc-800 py-[2%] p-2 rounded-md text-sm sm:text-md md:text-lg lg:text-lg xl:text-xl"
                   >
                     Request
                   </Link>
@@ -118,29 +118,30 @@ const Navbar = () => {
                 {pathname === "/profile" ? (
                   <a
                     onClick={editprofile}
-                    className="t hover:bg-zinc-800 py-[2%] cursor-pointer rounded-md text-sm sm:text-md md:text-lg lg:text-lg xl:text-xl"
+                    className="t hover:bg-zinc-800 py-[2%] p-2 cursor-pointer rounded-md text-sm sm:text-md md:text-lg lg:text-lg xl:text-xl"
                   >
                     Edit Profile
                   </a>
                 ) : (
                   <Link
                     to={"/profile"}
-                    className="t hover:bg-zinc-800 py-[2%] rounded-md text-sm sm:text-md md:text-lg lg:text-lg xl:text-xl"
+                    className="t hover:bg-zinc-800 py-[2%] p-2 rounded-md text-sm sm:text-md md:text-lg lg:text-lg xl:text-xl"
                   >
                     Profile
                   </Link>
                 )}
 
                 <Link
-                  to={"/login"}
+                  to={"/"}
                   onClick={handlelogut}
-                  className="hover:bg-zinc-800 py-[2%] rounded-md text-sm sm:text-md md:text-lg lg:text-lg xl:text-xl"
+                  className="hover:bg-zinc-800 py-[2%] p-2 rounded-md text-sm sm:text-md md:text-lg lg:text-lg xl:text-xl"
                 >
                   Logout
                 </Link>
               </div>
             </ul>
             <h1>{user.firstName}</h1>
+            <hr />
           </div>
         </div>
       ) : (

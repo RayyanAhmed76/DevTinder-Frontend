@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { Adduser } from "../store/UserSlice";
+import { div } from "framer-motion/client";
 
 const Login = () => {
   const [EmailID, setEmailID] = useState(null);
@@ -58,70 +59,62 @@ const Login = () => {
   }, []);
 
   return (
-    <div className="flex justify-center items-center min-h-screen px-4">
-      <div
-        className="card bg-zinc-800 shadow-sm w-full 
+    <div className="bg-[rgba(0,0,0,.6)] w-screen h-screen absolute top-0 left-0 justify-center items-center z-[50]">
+      <div className="flex justify-center items-center min-h-screen px-4 absolute  ">
+        <div
+          className="card bg-zinc-800 shadow-sm w-full 
     max-w-sm sm:max-w-md md:max-w-xl lg:max-w-2xl 
     rounded-xl p-6 sm:p-8 md:p-10 lg:p-12"
-      >
-        {/* Header */}
-        <div
-          className="flex relative justify-center items-center font-semibold 
-      text-2xl sm:text-3xl md:text-4xl mb-10 mt-2"
         >
-          <h1>Login</h1>
-          <i
-            onClick={goBack}
-            className="ri-close-fill absolute right-0 p-4 cursor-pointer text-xl md:text-2xl"
-          ></i>
-        </div>
+          {/* Header */}
+          <div className="flex  justify-center items-center font-semibold text-2xl sm:text-3xl mb-10 mt-4">
+            <h1>Login</h1>
+            <i
+              onClick={goBack}
+              className="ri-close-fill absolute right-0 p-4 cursor-pointer text-lg md:text-2xl lg:text-3xl sm:text-xl"
+            ></i>
+          </div>
 
-        {/* Form */}
-        <div className="flex flex-col gap-8">
-          {/* Email */}
-          <label className="input validator w-full flex items-center gap-3 text-base md:text-lg">
-            {/* SVG here */}
-            <input
-              ref={emailRef}
-              type="email"
-              placeholder="Enter Email address"
-              className="w-full text-base md:text-lg"
-              value={EmailID}
-              onChange={(e) => setEmailID(e.target.value)}
-            />
-          </label>
+          <div className="flex flex-col gap-8">
+            <label className="input validator w-full flex items-center gap-3 text-base md:text-lg">
+              <input
+                ref={emailRef}
+                type="email"
+                placeholder="Enter Email address"
+                className="w-full text-base md:text-lg"
+                value={EmailID}
+                onChange={(e) => setEmailID(e.target.value)}
+              />
+            </label>
 
-          {/* Password */}
-          <label className="input validator w-full flex items-center gap-3 text-base md:text-lg">
-            {/* SVG here */}
-            <input
-              ref={passwordRef}
-              type="password"
-              placeholder="Password"
-              className="w-full text-base md:text-lg"
-              value={Password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </label>
+            <label className="input validator w-full flex items-center gap-3 text-base md:text-lg">
+              <input
+                ref={passwordRef}
+                type="password"
+                placeholder="Password"
+                className="w-full text-base md:text-lg"
+                value={Password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </label>
 
-          {/* Buttons */}
-          <div className="flex flex-col gap-6">
-            <button
-              onClick={handleLogin}
-              className="btn bg-white text-black border border-[#e5e5e5] flex 
-            items-center justify-center gap-2 py-3 text-base sm:text-lg md:text-xl"
-            >
-              {/* SVG */}
-              Login with Email
-            </button>
+            <div className="flex flex-col gap-6">
+              <button
+                onClick={handleLogin}
+                className="btn bg-white hover:bg-zinc-400 duration-300 text-black  flex 
+            items-center justify-center mt-5 py-3 text-base sm:text-lg md:text-xl"
+              >
+                Login with Email
+              </button>
 
-            <Link
-              to={"/signup"}
-              className="text-center px-4 py-3 hover:bg-zinc-400 rounded-lg 
+              <Link
+                to={"/signup"}
+                className="text-center px-4 py-3 hover:bg-zinc-400 rounded-lg 
             cursor-pointer font-semibold text-base sm:text-lg md:text-xl"
-            >
-              Don't have an account? Sign up
-            </Link>
+              >
+                Don't have an account? Sign up
+              </Link>
+            </div>
           </div>
         </div>
       </div>

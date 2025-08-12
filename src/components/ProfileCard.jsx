@@ -51,23 +51,23 @@ const ProfileCard = ({ data }) => {
   return (
     <div className="  overflow-x-hidden ">
       <Navbar />
-      <div className="min-h-screen flex items-center justify-center p-4 ">
+      <div className="min-h-screen flex items-center pt-[15vh] bg-gradient-to-br from-gray-900 to-gray-800 justify-center p-4 ">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="bg-zinc-600 rounded-2xl shadow-xl p-8 w-[40vh]  h-auto "
+          className="bg-zinc-700 rounded-2xl shadow-xl p-8 max-w-sm w-full mx-auto"
         >
-          <div className="flex flex-col items-center md:mt-[30%] gap-6 text-center">
+          <div className="flex flex-col items-center md:mt-[30%] gap-6 text-center ">
             <img
               src={profile.photoURL}
               alt="Profile"
-              className="w-32 h-32 md:w-52 md:h-52 rounded-full object-cover border-4 border-blue-500"
+              className="w-42 h-42 rounded-full ring-4 ring-pink-500 mx-auto mb-4 object-cover"
             />
-            <h2 className="text-2xl font-bold mt-4">
+            <h2 className="text-2xl font-bold text-white text-center">
               {profile.firstName} {profile.lastName}
             </h2>
-            <p className="text-sm text-gray-300">
+            <p className="text-gray-400 text-center">
               {profile.gender}, {profile.age} years old
             </p>
             <p className="mt-4 text-gray-400 md:text-xl">{profile.about}</p>
@@ -94,7 +94,7 @@ const ProfileCard = ({ data }) => {
                     onClick={() => {
                       handlebutton("ignored", profile.user_id);
                     }}
-                    className="px-4 py-2 bg-zinc-500 rounded-lg cursor-pointer text-xl font-semibold hover:bg-zinc-400 hover:text-red-600"
+                    className="px-5 py-2 rounded-full bg-gray-600 text-white cursor-pointer hover:bg-red-500 transition"
                   >
                     Ignore
                   </button>
@@ -102,7 +102,7 @@ const ProfileCard = ({ data }) => {
                     onClick={() => {
                       handlebutton("interested", profile.user_id);
                     }}
-                    className="px-4 py-2 bg-zinc-500 rounded-lg cursor-pointer text-xl font-semibold hover:bg-zinc-400  hover:text-green-600"
+                    className="px-5 py-2 rounded-full bg-gray-600 cursor-pointer text-white hover:bg-green-500 transition"
                   >
                     Interested
                   </button>

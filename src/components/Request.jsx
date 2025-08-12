@@ -49,9 +49,9 @@ const Request = () => {
 
   return (
     request && (
-      <div className=" overflow-x-hidden  ">
+      <div className=" overflow-x-hidden bg-gradient-to-br from-gray-900 to-gray-800  ">
         <Navbar />
-        <div className="h-screen ">
+        <div className="h-screen mb-[7vh] ">
           <h1 className="text-3xl md:text-6xl font-semibold text-center pt-[20%]  mt-3  ">
             Request
           </h1>
