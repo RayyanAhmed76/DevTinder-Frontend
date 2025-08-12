@@ -11,20 +11,21 @@ import { toast } from "react-toastify";
 const Request = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const request = useSelector((state) => state.request);
+  const request = useSelector((state) => state.request || []);
+
   const handlerequest = async (status, _id) => {
+    dispatch(RemoveRequest(_id));
     const res = await axios.post(
       `http://localhost:7777/request/review/${status}/${_id}`,
       {},
       { withCredentials: true }
     );
-    dispatch(RemoveRequest(_id));
+
     if (status === "accepted") {
       toast.success("Request accepted successfully!");
     } else {
       toast.error("Request rejected!");
     }
-    console.log(res.data.fromUserid);
   };
 
   const fetchRequest = async () => {
@@ -45,17 +46,16 @@ const Request = () => {
     fetchRequest();
   }, []);
 
-  if (!request) return;
-
   return (
     request && (
       <div className=" overflow-x-hidden bg-gradient-to-br from-gray-900 to-gray-800  ">
         <Navbar />
-        <div className="h-screen mb-[7vh] ">
-          <h1 className="text-3xl md:text-6xl font-semibold text-center pt-[20%]  mt-3  ">
+        <div className="h-screen mt-[15vh]  ">
+          <h1 className="text-3xl md:text-6xl font-semibold text-center   mt-3  ">
             Request
           </h1>
-          {request.length === 0 ? (
+          {request.length === 0 ||
+          request.every((r) => r.fromUserid === null) ? (
             <h1 className="text-center mt-5 text-lg md:text-xl text-gray-400 ">
               No Request yet
             </h1>
@@ -63,16 +63,9 @@ const Request = () => {
             <div>
               <div className="overflow-y-auto "></div>
               {request.map((r, i) => {
-                const {
-                  _id,
-                  firstName,
-                  lastName,
-                  photoURL,
-                  age,
-                  gender,
-                  about,
-                  skills,
-                } = r.fromUserid;
+                if (!r.fromUserid) return null;
+                const { _id, firstName, lastName, photoURL, about } =
+                  r.fromUserid;
                 return (
                   <div className="p-5  ">
                     <div className="bg-zinc-700 mb-3 shadow-sm p-4 rounded-lg ">

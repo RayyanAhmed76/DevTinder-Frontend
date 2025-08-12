@@ -59,13 +59,9 @@ const Login = () => {
   }, []);
 
   return (
-    <div className="bg-[rgba(0,0,0,.6)] w-screen h-screen absolute top-0 left-0 justify-center items-center z-[50]">
+    <div className="bg-[rgba(0,0,0,.6)] w-screen h-screen absolute top-0 left-0 flex justify-center items-center z-[50]">
       <div className="flex justify-center items-center min-h-screen px-4 absolute  ">
-        <div
-          className="card bg-zinc-800 shadow-sm w-full 
-    max-w-sm sm:max-w-md md:max-w-xl lg:max-w-2xl 
-    rounded-xl p-6 sm:p-8 md:p-10 lg:p-12"
-        >
+        <div className="card bg-zinc-800 shadow-sm w-[90%] max-w-md p-6">
           {/* Header */}
           <div className="flex  justify-center items-center font-semibold text-2xl sm:text-3xl mb-10 mt-4">
             <h1>Login</h1>

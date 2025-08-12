@@ -47,8 +47,8 @@ const Signup = () => {
   };
 
   return (
-    <div className="bg-[rgba(0,0,0,.6)] w-screen h-screen absolute top-0 left-0 justify-center items-center z-[50]">
-      <div className="card bg-zinc-800 rounded-2xl  flex items-center  sm:w-92 md:w-[28rem] lg:w-[32rem] xl:w-[36rem] shadow-sm mx-auto absolute  ">
+    <div className="bg-[rgba(0,0,0,.6)] w-screen h-screen absolute top-0 left-0 flex justify-center items-center z-[50]">
+      <div className="card bg-zinc-800 rounded-2xl   shadow-lg w-[90%] max-w-md p-6 sm:p-8 absolute  ">
         {/* Header */}
         <div className="flex  justify-center items-center font-semibold text-2xl sm:text-3xl mb-10 mt-4">
           <h1>Signup</h1>
