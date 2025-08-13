@@ -17,6 +17,7 @@ const Connections = () => {
         withCredentials: true,
       });
       dispatch(addConnection(res.data.data));
+      console.log("Connections API response:", res.data);
     } catch (err) {
       console.error(err);
     }
@@ -27,6 +28,7 @@ const Connections = () => {
   };
 
   useEffect(() => {
+    console.log("heyyy");
     handleconnection();
   }, []);
 

@@ -45,7 +45,7 @@ const Navbar = () => {
     );
     dispatch(Removeuser());
     toast.success("Logout Successfull!");
-    navigate("/login");
+    navigate("/");
   };
   console.log(user);
   return (
