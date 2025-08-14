@@ -13,6 +13,7 @@ import Connections from "./components/Connections";
 import ReqProfile from "./components/ReqProfile";
 import Request from "./components/Request";
 import Signup from "./components/Signup";
+import Chat from "./components/Chat";
 
 const App = () => {
   return (
@@ -31,6 +32,7 @@ const App = () => {
         <Route path="/request" element={<Request />}>
           <Route path="/request/profile" element={<ReqProfile />} />
         </Route>
+        <Route path="/chat/:touserid" element={<Chat />} />
       </Routes>
       <ToastContainer position="top-center" autoClose={2000} />
     </div>

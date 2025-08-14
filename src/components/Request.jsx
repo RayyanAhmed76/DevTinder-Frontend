@@ -72,7 +72,7 @@ const Request = () => {
                       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                         <div
                           onClick={() => profileview(r.fromUserid)}
-                          className=" relative flex items-center  cursor-pointer"
+                          className=" relative flex items-center cursor-pointer"
                         >
                           <img
                             className="w-20 h-20 rounded-full mr-5 object-cover"
@@ -86,7 +86,6 @@ const Request = () => {
                             <p>{about}</p>
                           </div>
                         </div>
-
                         <div className="flex justify-center md:justify-between items-center gap-3">
                           <i
                             onClick={() => handlerequest("rejected", r._id)}
