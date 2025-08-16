@@ -1,18 +1,30 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Send } from "lucide-react";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
+import { createsocketconnection } from "../../utils/socketio";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router";
 
 export default function Chat() {
-  const [message, setMessage] = useState("");
-  const [messages, setMessages] = useState([]);
+  const { touserid } = useParams();
+  const [messages, setmessages] = useState([]);
+  const user = useSelector((state) => state.user);
+  const userId = user?._id;
 
   const handleSend = (e) => {
     e.preventDefault();
-    if (!message.trim()) return;
-    setMessages([...messages, message.trim()]);
-    setMessage("");
+    setmessages((messages) => [...messages, setmessages(messages)]);
   };
+
+  useEffect(() => {
+    const socket = createsocketconnection();
+    socket.emit("joinchat", { Firstname: user.firstName, userId, touserid });
+
+    return () => {
+      socket.disconnect();
+    };
+  }, [userId, touserid]);
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-zinc-700 p-4">
@@ -65,14 +77,15 @@ export default function Chat() {
         >
           <input
             type="text"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
+            value={messages}
+            onChange={(e) => setmessages(e.target.value)}
             placeholder="Type a message..."
-            className="flex-1 px-4 py-3 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-400 bg-gray-700 text-white placeholder-gray-400"
+            className="flex-1 px-4 py-2 pr-2 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-400 bg-gray-700 text-white placeholder-gray-400"
           />
           <button
+            onClick={handleSend}
             type="submit"
-            className="px-5 py-3 bg-gradient-to-r from-pink-500 to-yellow-400 text-white rounded-lg hover:opacity-90 flex items-center gap-1"
+            className="px-4 py-2 cursor-pointer bg-gradient-to-r from-pink-500 to-yellow-400 text-white rounded-lg hover:opacity-90 flex items-center gap-1"
           >
             <Send className="w-3 h-3" />
             Send

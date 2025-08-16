@@ -10,7 +10,6 @@ const Connections = () => {
   const user = useSelector((state) => state.connection);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { touserid } = useParams();
 
   const handleconnection = async () => {
     try {
