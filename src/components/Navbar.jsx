@@ -47,7 +47,7 @@ const Navbar = () => {
     toast.success("Logout Successfull!");
     navigate("/");
   };
-  console.log(user);
+
   return (
     <div className="absolute top-0 left-0 w-full flex justify-between items-center  px-4 py-3 bg-transparent z-100 ">
       <div className="flex-1">
