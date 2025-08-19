@@ -16,21 +16,40 @@ export default function Chat() {
 
   const chathistory = async () => {
     const chatmessage = await axios.get(
-      `http://localhost:7777/chat/${touserid}`,
+      `http://localhost:7777/chat/${touserid}?limit=50`,
       { withCredentials: true }
     );
+    console.log(chatmessage.data.messages);
+
+    const chatt = chatmessage?.data?.messages.map((msg) => {
+      return {
+        firstName: msg?.senderId?.firstName,
+        lastName: msg?.senderId?.lastName,
+        photoURL: msg?.senderId?.photoURL,
+        text: msg?.text,
+      };
+    });
+
+    setmessages(chatt);
   };
+
+  useEffect(() => {
+    chathistory();
+  }, []);
 
   useEffect(() => {
     if (!user) {
       return;
     }
     const socket = createsocketconnection();
-    socket.emit("joinchat", { Firstname: user?.firstName, userId, touserid });
+    socket.emit("joinchat", { firstName: user?.firstName, userId, touserid });
 
-    socket.on("messagereceived", ({ Firstname, text }) => {
-      console.log(Firstname + " : " + text);
-      setmessages((messages) => [...messages, { Firstname, text }]);
+    socket.on("messagereceived", ({ firstName, lastName, photoURL, text }) => {
+      console.log(firstName + " : " + text);
+      setmessages((messages) => [
+        ...messages,
+        { firstName, lastName, photoURL, text },
+      ]);
       setmessage("");
     });
 
@@ -43,7 +62,9 @@ export default function Chat() {
     e.preventDefault();
     const socket = createsocketconnection();
     socket.emit("sendMessage", {
-      Firstname: user.firstName,
+      firstName: user?.firstName,
+      lastName: user?.lastName,
+      photoURL: user?.photoURL,
       userId,
       touserid,
       text: message,
@@ -61,17 +82,24 @@ export default function Chat() {
         <div className="h-full overflow-y-auto">
           {messages.map((msg, index) => (
             <div key={index} className="p-3  ">
-              <div className="chat chat-start ">
+              <div
+                className={
+                  "chat " +
+                  (user?.firstName === msg?.firstName
+                    ? "chat-end"
+                    : "chat-start")
+                }
+              >
                 <div className="chat-image avatar">
                   <div className="w-10 rounded-full">
                     <img
                       alt="Tailwind CSS chat bubble component"
-                      src="https://img.daisyui.com/images/profile/demo/kenobee@192.webp"
+                      src={msg.photoURL}
                     />
                   </div>
                 </div>
                 <div className="chat-header ">
-                  {msg.Firstname}
+                  {`${msg.firstName} ${msg.lastName}`}
                   <time className="text-xs opacity-50">12:45</time>
                 </div>
                 <div className="chat-bubble">{msg.text}</div>
